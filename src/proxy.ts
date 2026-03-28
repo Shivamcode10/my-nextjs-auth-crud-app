@@ -2,7 +2,8 @@ import { verifyToken } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+// 🔥 IMPORTANT: function name must be "proxy"
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const user = await verifyToken(request);
@@ -10,14 +11,14 @@ export async function middleware(request: NextRequest) {
   // 🔐 PROTECT ALL DASHBOARD ROUTES
   if (pathname.startsWith('/dashboard')) {
     if (!user) {
-      console.log('[MIDDLEWARE] No token → redirecting to /login');
+      console.log('[PROXY] No token → redirecting to /login');
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
     // 👑 ADMIN ROUTE PROTECTION
     if (pathname.startsWith('/dashboard/admin')) {
       if (user.role !== 'admin') {
-        console.log('[MIDDLEWARE] Not admin → redirecting to /dashboard');
+        console.log('[PROXY] Not admin → redirecting to /dashboard');
         return NextResponse.redirect(new URL('/dashboard', request.url));
       }
     }
@@ -25,13 +26,14 @@ export async function middleware(request: NextRequest) {
 
   // 🔁 REDIRECT LOGGED-IN USERS FROM AUTH PAGES
   if ((pathname === '/login' || pathname === '/register') && user) {
-    console.log('[MIDDLEWARE] Already logged in → redirecting to /dashboard');
+    console.log('[PROXY] Already logged in → redirecting to /dashboard');
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   return NextResponse.next();
 }
 
+// ✅ Route matcher
 export const config = {
   matcher: [
     '/dashboard/:path*',
