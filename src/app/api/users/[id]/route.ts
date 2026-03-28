@@ -1,4 +1,5 @@
 // src/app/api/users/[id]/route.ts
+
 import connectDB from '@/lib/connectDB';
 import User from '@/models/User';
 import { NextResponse } from 'next/server';
@@ -11,7 +12,7 @@ export async function GET(
   try {
     await connectDB();
 
-    const { id } = await params; // 🔥 FIX
+    const { id } = await params;
 
     const user = await User.findById(id).select('-password');
 
@@ -41,7 +42,7 @@ export async function PUT(
   try {
     await connectDB();
 
-    const { id } = await params; // 🔥 FIX
+    const { id } = await params;
     const body = await req.json();
     const { name, email } = body;
 
@@ -64,6 +65,39 @@ export async function PUT(
     console.error(error);
     return NextResponse.json(
       { message: 'An error occurred while updating the user.' },
+      { status: 500 }
+    );
+  }
+}
+
+// ✅ DELETE user by ID (🔥 NEW)
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    await connectDB();
+
+    const { id } = await params;
+
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: 'User deleted successfully' },
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: 'An error occurred while deleting the user.' },
       { status: 500 }
     );
   }
