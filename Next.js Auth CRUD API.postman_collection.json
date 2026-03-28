@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "REGISTER USER",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -38,7 +38,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "LOGIN USER",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -64,6 +64,30 @@
 						"login"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "USE TOKEN",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
