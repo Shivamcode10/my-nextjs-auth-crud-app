@@ -1,3 +1,5 @@
+// src/app/api/auth/register/route.ts
+
 import connectDB from '@/lib/connectDB';
 import User from '@/models/User';
 import { NextResponse } from 'next/server';
@@ -6,16 +8,34 @@ import { registerSchema } from '@/lib/validations/authSchema';
 
 export async function POST(req: Request) {
   try {
-    // 1️⃣ Parse body
-    const body = await req.json();
+    // ✅ 1. Safely read raw body
+    const text = await req.text();
 
-    // ✅ include role optionally
+    if (!text) {
+      return NextResponse.json(
+        { message: 'Request body is empty' },
+        { status: 400 }
+      );
+    }
+
+    // ✅ 2. Parse JSON safely
+    let body;
+    try {
+      body = JSON.parse(text);
+    } catch (err) {
+      return NextResponse.json(
+        { message: 'Invalid JSON format' },
+        { status: 400 }
+      );
+    }
+
+    // ✅ 3. Validate
     const { name, email, password, role } = registerSchema.parse(body);
 
-    // 2️⃣ Connect DB
+    // ✅ 4. Connect DB
     await connectDB();
 
-    // 3️⃣ Check existing user
+    // ✅ 5. Check existing user
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -24,7 +44,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 4️⃣ Create user
+    // ✅ 6. Create user
     const user = await User.create({
       name,
       email,
@@ -32,7 +52,7 @@ export async function POST(req: Request) {
       role: role || 'user',
     });
 
-    // 5️⃣ Remove password from response
+    // ✅ 7. Remove password
     const { password: _, ...userWithoutPassword } = user.toObject();
 
     return NextResponse.json(
@@ -48,13 +68,13 @@ export async function POST(req: Request) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { message: 'Invalid input', errors: error.issues }, // ✅ FIX HERE
+        { message: 'Invalid input', errors: error.issues },
         { status: 400 }
       );
     }
 
     return NextResponse.json(
-      { message: 'An error occurred while registering the user.' },
+      { message: 'Internal server error' },
       { status: 500 }
     );
   }
