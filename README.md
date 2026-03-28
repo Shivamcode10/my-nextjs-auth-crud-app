@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Live Demo
 
-## Getting Started
+🔗 Live Website: https://my-nextjs-auth-crud-app.vercel.app/
 
-First, run the development server:
+---
 
-```bash
+# 📌 Project Overview
+
+**Next.js Auth CRUD App** is a full-stack web application that provides secure user authentication and basic CRUD functionality using modern web technologies.
+
+The application demonstrates **JWT authentication, role-based access control, and protected routes**, making it a scalable and production-ready system.
+
+---
+
+# 🛠️ Tech Stack
+
+## 🎨 Frontend
+
+* Next.js (App Router)
+* React.js
+* TypeScript
+* Tailwind CSS
+
+## ⚙️ Backend
+
+* Next.js API Routes (Serverless Functions)
+* MongoDB
+* Mongoose
+* JWT (jsonwebtoken + jose)
+* Zod (Validation)
+* bcryptjs (Password hashing)
+
+## ☁️ Deployment
+
+* Vercel
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication
+
+* User Registration
+* User Login
+* JWT-based authentication
+* HTTP-only cookie session handling
+
+## 🔑 Authorization
+
+* Role-based access control (User/Admin)
+* Protected dashboard routes
+* Admin route restriction
+
+## 📊 CRUD Functionality
+
+* Create user data
+* Read user details
+* Update user profile
+* Delete (extendable)
+
+## 🛡️ Security
+
+* Password hashing using bcrypt
+* JWT token authentication
+* Secure cookies in production
+* Input validation using Zod
+
+## 🎯 User Experience
+
+* Clean and responsive UI
+* Protected dashboard
+* Redirect handling for authenticated users
+
+---
+
+# 📁 Project Structure
+
+src/
+├── app/ → UI + API Routes
+├── app/api/ → Backend APIs
+├── components/ → Reusable UI Components
+├── lib/ → Auth, DB connection, validation
+├── models/ → MongoDB Schemas
+
+---
+
+# 🔗 API Endpoints
+
+## 🔐 Auth APIs
+
+* POST /api/auth/register
+* POST /api/auth/login
+* POST /api/auth/logout
+
+## 👤 User APIs
+
+* GET /api/users/:id
+* PUT /api/users/:id
+
+---
+
+# ⚙️ Setup Instructions
+
+## 1️⃣ Clone Repository
+
+git clone https://github.com/Shivamcode10/my-nextjs-auth-crud-app.git
+cd my-nextjs-auth-crud-app
+
+## 2️⃣ Install Dependencies
+
+npm install
+
+## 3️⃣ Setup Environment Variables
+
+Create `.env.local` file:
+
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+
+## 4️⃣ Run Project
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+👉 Open: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 🧪 API Testing
 
-## Learn More
+* APIs tested using Postman
+* Collection included in repository
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 📈 Scalability
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Modular architecture (can be converted to microservices)
+* Serverless API design using Next.js
+* Can integrate Redis caching
+* Supports load balancing
+* Optimized database queries
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 💡 Key Highlights
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project follows REST principles and is designed with scalability and modular architecture in mind.
+
+---
+
+# 👨‍💻 Author
+
+Shivam Lahane
