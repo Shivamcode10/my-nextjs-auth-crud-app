@@ -77,7 +77,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWM4MzI4ZTRmNTBlMjY4OGJhMjRjZWEiLCJuYW1lIjoiU2hpdmFtIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzQ3Mjc4MjgsImV4cCI6MTc3NDczMTQyOH0.DMYQ-OINNdlF8PY8Av1ifIYcFlRFv_KkTYTaeeAW2bc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWM4MzI4ZTRmNTBlMjY4OGJhMjRjZWEiLCJuYW1lIjoiU2hpdmFtIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzQ3Mjc4MjgsImV4cCI6MTc3NDczMTQyOH0.DMYQ-OINNdlF8PY8Av1ifIYcFlRFv_KkTYTaeeAW2bc",
 							"type": "string"
 						}
 					]
@@ -105,7 +105,12 @@
 			"name": "UPDATE USER",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+                {
+                   "key": "Authorization",
+                "value": "Bearer YOUR_TOKEN"
+            }
+         ]
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"name\": \"Shivam Updated\"\r\n}",
